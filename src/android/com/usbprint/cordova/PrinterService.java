@@ -106,7 +106,7 @@ public class PrinterService extends CordovaPlugin {
 
     private void registerForDetachBroadcast() {
         IntentFilter filter = new IntentFilter(UsbManager.ACTION_USB_DEVICE_DETACHED);
-        applicationContext.registerReceiver(detachReceiver, filter);
+        applicationContext.registerReceiver(detachReceiver, filter, Context.RECEIVER_NOT_EXPORTED);
     }
 
     private Context getApplicationContext() {
@@ -290,8 +290,8 @@ public class PrinterService extends CordovaPlugin {
             Printer p = new Printer(this.usbManager, dev, printer_name, callbackContext);
             this.printers.put(printer_name, p);
             PendingIntent pi = PendingIntent.getBroadcast(this.applicationContext, 0, new Intent(ACTION_USB_PERMISSION),
-                    0);
-            this.applicationContext.registerReceiver(this.mPermissionReceiver, new IntentFilter(ACTION_USB_PERMISSION));
+                     PendingIntent.FLAG_IMMUTABLE);
+            this.applicationContext.registerReceiver(this.mPermissionReceiver, new IntentFilter(ACTION_USB_PERMISSION), Context.RECEIVER_NOT_EXPORTED);
             this.usbManager.requestPermission(dev, pi);
         } else {
             Printer p = this.printers.get(printer_name);

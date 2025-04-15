@@ -9,8 +9,13 @@ This Plugin allows you to print documents via USB printer.
 
 ### Installation
 
+Cordova project
 ```
-cordova plugin add cordova-plugin-usbprint --save
+cordova plugin add https://github.com/Kakkada/cordova-plugin-usbprint.git
+```
+or Capacitor project
+```
+npm i https://github.com/Kakkada/cordova-plugin-usbprint.git
 ```
 Once application was started "UsbPrint" will be available in "window.cordova.plugins". So you can access plugin as
 ```
